@@ -64,44 +64,32 @@ In the code above the Adapter Pattern is used to adapt data from a legacy system
 interface Shape {
     draw();
 }
-```
-```
 // Implement Circle and Square classes that implement the Shape interface
 class Circle implements Shape {
     draw() {
         // Draw a circle
     }
 }
-```
-```
 class Square implements Shape {
     draw() {
         // Draw a square
     }
 }
-```
-```
 // Define a Renderer interface
 interface Renderer {
     render(shape);
 }
-```
-```
 // Implement VectorRenderer and RasterRenderer classes that implement the Renderer interface
 class VectorRenderer implements Renderer {
     render(shape) {
         // Render the shape in vector format
     }
 }
-```
-```
 class RasterRenderer implements Renderer {
     render(shape) {
         // Render the shape in raster format
     }
 }
-```
-```
 // Define a Drawing class to manage shapes and rendering
 class Drawing {
     shapes = new List();
@@ -331,8 +319,6 @@ In this pseudocode, the Car class represents basic rental cars with properties l
 interface Artwork {
     display();
 }
-```
-```
 // Implement ConcreteArtwork that represents individual artworks
 class ConcreteArtwork implements Artwork {
     name;
@@ -349,8 +335,6 @@ class ConcreteArtwork implements Artwork {
         // Render the high-resolution image
     }
 }
-```
-```
 // Define an ArtGallery class to manage artworks
 class ArtGallery {
     artworks;
