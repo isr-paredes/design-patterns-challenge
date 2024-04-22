@@ -15,7 +15,7 @@ function getLegacyData() {
 ```
 Adapt it into a new format that uses simpler keys like `"name"`, `"id"`, `"department"`, and `"pay"`.
 
-**Solution**
+[**Solution**](adapter.go)
 ```
 package main
 import "fmt"
@@ -120,7 +120,7 @@ class Drawing {
 
 Introduce the Bridge Pattern by creating an abstract class that connects shapes (Circle and Square) with renderers (VectorRenderer and RasterRenderer).
 
-**Solution**
+[**Solution**](bridge.go)
 ```
 package main
 
@@ -205,7 +205,7 @@ In the solution above the Bridge Pattern is used to decouple shapes (abstraction
 ## Composite Pattern:
 **Problem:** Create a hierarchical structure for managing a company's organizational chart. Each node in the hierarchy represents an employee or a department. Implement the composite pattern to treat individual employees and departments uniformly as part of the organization.
 
-**Solution**
+[**Solution**](composite.go)
 ```
 package main
 import (
