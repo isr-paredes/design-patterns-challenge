@@ -4,7 +4,7 @@ import "fmt"
 
 // Interfaces
 type Shape interface {
-    Draw(renderer Renderer)
+    Draw()
 }
 
 type Renderer interface {
@@ -61,7 +61,24 @@ func (rr *RasterRenderer) RenderSquare() {
     fmt.Println("Rendering Square in Raster format")
 }
 
+//Drawing
+type Drawing struct {
+    shapes []Shape
+}
+
+func (d *Drawing) AddShape(shape Shape) {
+    d.shapes = append(d.shapes, shape)
+}
+
+func (d *Drawing) DrawShapes() {
+    for _, shape := range d.shapes {
+        shape.Draw()
+    }
+}
+
 func main() {
+    drawing := Drawing{}
+
     circle := &Circle{}
     square := &Square{}
 
@@ -71,6 +88,8 @@ func main() {
     circle.SetRenderer(vectorRenderer)
     square.SetRenderer(rasterRenderer)
 
-    circle.Draw()
-    square.Draw()
+    drawing.AddShape(circle)
+    drawing.AddShape(square)
+
+    drawing.DrawShapes()
 }
