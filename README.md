@@ -312,6 +312,108 @@ In the solution above, the Composite Pattern is used to create a hierarchical st
 ## Facade Pattern:
 **Problem:** You are developing a smart home automation system that controls various devices such as lights, thermostats, and security cameras. Each device has its own complex interface and set of commands for operation. Implement a facade that provides a simplified interface for users to interact with multiple devices seamlessly without needing to understand the intricacies of each device's individual commands.
 
+**Solution**
+```
+package main
+import (
+    "fmt"
+)
+//Ligth
+type LightInt interface {
+	TurnOn()
+	TurnOff()
+}
+type LightS struct{}
+func(l *LightS) TurnOn(){
+    fmt.Println("Light ON")
+}
+func(l *LightS) TurnOff(){
+    fmt.Println("Light OFF")
+}
+//Thermostat
+type ThermostatInt interface {
+	SetTemperature(temp int)
+	GetTemperature() int
+}
+type ThermostatS struct{
+    temp int
+}
+func (t *ThermostatS) GetTemperature() int{
+    fmt.Printf("Temperature is %d degrees \n",t.temp)
+    return t.temp
+}
+func (t *ThermostatS) SetTemperature(temp int){
+    t.temp=temp
+    fmt.Printf("Temperature set to %d degrees \n", temp)
+}
+//SecurityCamera
+type SecurityCameraInt interface {
+    StartRecording()
+	StopRecording()
+}
+type SecurityCameraS struct{}
+func (s *SecurityCameraS) StartRecording(){
+    fmt.Println("Is recording")
+}
+func (s *SecurityCameraS) StopRecording(){
+    fmt.Println("Is NOT recording")
+}
+
+
+// Facade
+type SmartHomeFacade struct {
+	light        LightInt
+	thermostat   ThermostatInt
+	securityCamera SecurityCameraInt
+
+
+}
+func NewSmartHomeFacade() *SmartHomeFacade {
+	return &SmartHomeFacade{
+		light:        &LightS{},
+		thermostat:   &ThermostatS{},
+		securityCamera: &SecurityCameraS{},
+	}
+}
+// Facade functions 
+func (f *SmartHomeFacade) TurnOnLights() {
+	f.light.TurnOn()
+}
+
+func (f *SmartHomeFacade) TurnOffLights() {
+	f.light.TurnOff()
+}
+
+func (f *SmartHomeFacade) SetTemperature(temp int) {
+	f.thermostat.SetTemperature(temp)
+}
+
+func (f *SmartHomeFacade) GetTemperature() int {
+	return f.thermostat.GetTemperature()
+}
+
+func (f *SmartHomeFacade) StartSecurityCamera() {
+	f.securityCamera.StartRecording()
+}
+
+func (f *SmartHomeFacade) StopSecurityCamera() {
+	f.securityCamera.StopRecording()
+}
+
+func main() {
+    facade := NewSmartHomeFacade()
+    facade.TurnOnLights()
+	facade.SetTemperature(22)
+	facade.StartSecurityCamera()
+
+	facade.TurnOffLights()
+	facade.StopSecurityCamera()
+    facade.GetTemperature()
+}
+```
+The Facade Pattern is a structural design pattern that provides a simplified interface to a complex subsystem. It's particularly useful when you want to hide the complexity of a system and provide a more straightforward way for clients to interact with it.
+
+
 ## Flyweight Pattern:
 **Problem:** You are developing a virtual city simulation game where thousands of buildings need to be rendered on the screen. Each building has unique characteristics such as height, color, and style. Implement a flyweight pattern to optimize memory usage and improve rendering performance by sharing common characteristics (e.g., textures, materials) among similar buildings while allowing each building to retain its unique properties.
 
